@@ -80,6 +80,7 @@ This project creates a single EC2 instance (Amazon Linux 2 by default) and outpu
 <img width="1366" height="768" alt="Screenshot (11) - Copy" src="https://github.com/user-attachments/assets/bcedd369-c2ae-40de-ad5b-783b221a280d" />
 <img width="1366" height="768" alt="Screenshot (12) - Copy" src="https://github.com/user-attachments/assets/a5ddc26d-a44d-42b0-99bb-787685268c24" />
 
+<img width="1198" height="555" alt="image" src="https://github.com/user-attachments/assets/91af52b9-64ce-4a75-8fec-a270c23f7b2b" />
 
 
 
