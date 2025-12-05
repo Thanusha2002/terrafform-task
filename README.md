@@ -193,6 +193,8 @@ This project creates a single EC2 instance (Amazon Linux 2 by default) and outpu
 
    bash
    terraform destroy -auto-approve
+   <img width="1366" height="768" alt="Screenshot (9)" src="https://github.com/user-attachments/assets/1ccf233f-f6d8-447d-a5cc-821ce12ef7e3" />
+
   
 
    
