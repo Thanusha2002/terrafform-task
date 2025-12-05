@@ -2,137 +2,6 @@
 
 This canvas contains everything you asked for: the Terraform code files (`main.tf`, `variables.tf`, `outputs.tf`) plus a `README.md` you can use in the project root. Copy each file into your project folder and follow the run steps in the README.
 
----
-
-## File: `main.tf`
-
-```hcl
-terraform {
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 4.0"
-    }
-  }
-}
-
-provider "aws" {
-  region = var.region
-}
-
-# Choose AMI by platform using a data source (keeps the code up-to-date).
-# Default is Amazon Linux 2. Set var.platform = "ubuntu" to use Ubuntu 22.04 LTS.
-
-data "aws_ami" "selected" {
-  most_recent = true
-
-  filter {
-    name   = "name"
-    values = var.platform == "ubuntu" ? ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"] : ["amzn2-ami-hvm-*-x86_64-gp2"]
-  }
-
-  owners = var.platform == "ubuntu" ? ["099720109477"] : ["137112412989"]
-}
-
-resource "aws_security_group" "ssh" {
-  name        = "terraform-allow-ssh"
-  description = "Allow SSH inbound"
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  tags = {
-    Name = "terraform-allow-ssh"
-  }
-}
-
-resource "aws_instance" "web" {
-  ami           = data.aws_ami.selected.id
-  instance_type = var.instance_type
-  key_name      = var.key_name
-  vpc_security_group_ids = [aws_security_group.ssh.id]
-
-  tags = {
-    Name = var.instance_name
-  }
-}
-```
-
----
-
-## File: `variables.tf`
-
-```hcl
-variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
-}
-
-variable "instance_type" {
-  description = "EC2 instance type"
-  type        = string
-  default     = "t2.micro"
-}
-
-variable "instance_name" {
-  description = "Name tag for the instance"
-  type        = string
-  default     = "terraform-ec2-sample"
-}
-
-variable "platform" {
-  description = "AMI platform: \"amazon-linux\" (default) or \"ubuntu\""
-  type        = string
-  default     = "amazon-linux"
-}
-
-variable "key_name" {
-  description = "Existing EC2 key pair name to enable SSH (required)"
-  type        = string
-  default     = ""
-}
-```
-
----
-
-## File: `outputs.tf`
-
-```hcl
-output "instance_id" {
-  description = "EC2 Instance ID"
-  value       = aws_instance.web.id
-}
-
-output "public_ip" {
-  description = "Public IP of the instance"
-  value       = aws_instance.web.public_ip
-}
-
-output "availability_zone" {
-  description = "Availability Zone of the instance"
-  value       = aws_instance.web.availability_zone
-}
-
-output "ami_id" {
-  description = "AMI ID used for the instance"
-  value       = data.aws_ami.selected.id
-}
-```
-
----
-
 ## File: `README.md`
 
 ````md
@@ -177,6 +46,7 @@ This project creates a single EC2 instance (Amazon Linux 2 by default) and outpu
 
    ```bash
    terraform apply -auto-approve
+   ```
 
    *Take a screenshot showing the "Apply complete!" output.*
 
@@ -185,16 +55,25 @@ This project creates a single EC2 instance (Amazon Linux 2 by default) and outpu
    ```bash
    terraform output
    ```
+
    The outputs will include `instance_id`, `public_ip`, `availability_zone`, and `ami_id`. Save these values for your deliverable.
 
 6. Confirm in the AWS Console: EC2 -> Instances. Take a screenshot showing the running instance (Instance ID, Name tag, and Public IP visible).
 
 7. Destroy the resources when done:
 
-   bash
+   ```bash
    terraform destroy -auto-approve
-   <img width="1366" height="768" alt="Screenshot (9)" src="https://github.com/user-attachments/assets/1ccf233f-f6d8-447d-a5cc-821ce12ef7e3" />
+   ```
 
-  
+   *Take a screenshot showing the destroy completed.*
 
-   
+## Notes for screenshots (what to capture)
+
+* `terraform plan` output (the plan stdout). Save as `plan.png` (or similar).
+* `terraform apply` completion (showing `Apply complete!`). Save as `apply_complete.png`.
+* AWS Console showing the running instance list with Instance ID, Name, Public IP. Save as `console_instance.png`.
+* `terraform destroy` completion. Save as `destroy_complete.png`.
+
+<img width="1366" height="768" alt="Screenshot (10)" src="https://github.com/user-attachments/assets/6fa15c47-63c0-43da-8c0f-b834633db0fe" />
+
