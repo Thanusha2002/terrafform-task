@@ -75,5 +75,11 @@ This project creates a single EC2 instance (Amazon Linux 2 by default) and outpu
 * AWS Console showing the running instance list with Instance ID, Name, Public IP. Save as `console_instance.png`.
 * `terraform destroy` completion. Save as `destroy_complete.png`.
 
-<img width="1366" height="768" alt="Screenshot (10)" src="https://github.com/user-attachments/assets/6fa15c47-63c0-43da-8c0f-b834633db0fe" />
+<img width="1366" height="768" alt="Screenshot (10) - Copy" src="https://github.com/user-attachments/assets/c1612a27-595c-487e-8e3e-864b961fc1a9" /> <img width="1366" height="768" alt="Screenshot (9) - Copy" src="https://github.com/user-attachments/assets/c412b59b-41f4-4850-8e9b-7ac084b7e773" />
+<img width="697" height="300" alt="Screenshot 2025-12-05 170135 - Copy" src="https://github.com/user-attachments/assets/ed037e13-39e6-4373-bf48-9c087ddaf044" />
+<img width="1366" height="768" alt="Screenshot (11) - Copy" src="https://github.com/user-attachments/assets/bcedd369-c2ae-40de-ad5b-783b221a280d" />
+<img width="1366" height="768" alt="Screenshot (12) - Copy" src="https://github.com/user-attachments/assets/a5ddc26d-a44d-42b0-99bb-787685268c24" />
+
+
+
 
